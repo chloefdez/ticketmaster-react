@@ -6,6 +6,7 @@ import SearchBar from "./components/SearchBar";
 import HeroFeaturedEvent from "./components/HeroFeaturedEvent";
 import DiscoverMore from "./components/DiscoverMore";
 import EventDetails from "./components/EventDetails";
+import SearchResults from "./components/SearchResults";
 
 // Inline Home “page” (just your existing sections)
 const Home: React.FC = () => (
@@ -24,8 +25,8 @@ const App: React.FC = () => {
         <Route path="/" element={<Home />} />
         {/* Keep preview route for now */}
         <Route path="/eventdetails" element={<EventDetails />} />
-        {/* Dynamic route (will be used soon) */}
         <Route path="/event/:id" element={<EventDetails />} />
+        <Route path="/search" element={<SearchResults />} />
       </Route>
     </Routes>
   );
