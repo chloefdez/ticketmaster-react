@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/tmapi/(.*)", "destination": "/api/tm/$1" }
+  ]
+}
