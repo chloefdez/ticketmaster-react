@@ -1,5 +1,8 @@
 {
   "version": 2,
+  "functions": {
+    "api/tm/**": { "runtime": "nodejs18.x" }
+  },
   "rewrites": [
     { "source": "/tmapi/(.*)", "destination": "/api/tm/$1" }
   ]
