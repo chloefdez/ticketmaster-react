@@ -115,16 +115,24 @@ const DiscoverMore: React.FC = () => {
     }
 
     // randomize pages a little so refreshes feel fresh
-    const page = () => Math.floor(Math.random() * 5);
+    const pageNum = Math.floor(Math.random() * 5);
 
-    const mk = (classificationName: string) =>
-      `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${encodeURIComponent(
-        API_KEY
-      )}&countryCode=US&size=200&sort=relevance,desc&page=${page()}&locale=*&classificationName=${encodeURIComponent(
-        classificationName
-      )}`;
+    const makeUrl = (classificationName: string) => {
+      const s = new URLSearchParams();
+      s.set("apikey", API_KEY);
+      s.set("countryCode", "US");
+      s.set("size", "24");
+      s.set("sort", "relevance,desc");
+      s.set("page", String(pageNum));
+      s.set("classificationName", classificationName);
+      return `/tmapi/discovery/v2/events.json?${s.toString()}`;
+    };
 
-    const urls = [mk("Music"), mk("Sports"), mk("Arts & Theater")];
+    const urls = [
+      makeUrl("Music"),
+      makeUrl("Sports"),
+      makeUrl("Arts & Theatre"),
+    ];
 
     const controller = new AbortController();
 
@@ -185,9 +193,6 @@ const DiscoverMore: React.FC = () => {
         }
 
         // --- enforce caps per artist/venue/city to break repeats even further
-        const artistSeen = new Set<string>();
-        const venueSeen = new Set<string>();
-        const citySeen = new Set<string>();
         const MAX_PER_ARTIST = 1;
         const MAX_PER_VENUE = 1;
         const MAX_PER_CITY = 1;

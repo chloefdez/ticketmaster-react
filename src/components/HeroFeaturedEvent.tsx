@@ -67,9 +67,14 @@ const HeroFeaturedEvent: React.FC = () => {
 
     const page = Math.floor(Math.random() * 5);
 
-    const url = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${encodeURIComponent(
-      API_KEY
-    )}&countryCode=US&size=200&sort=relevance,desc&page=${page}&locale=*`;
+    const search = new URLSearchParams();
+    search.set("apikey", API_KEY);
+    search.set("countryCode", "US");
+    search.set("size", "200");
+    search.set("sort", "relevance,desc");
+    search.set("page", String(page));
+
+    const url = `/tmapi/discovery/v2/events.json?${search.toString()}`;
 
     const controller = new AbortController();
 

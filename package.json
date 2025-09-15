@@ -10,8 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@clerk/clerk-js": "^5.93.0",
+    "@clerk/clerk-react": "^5.47.0",
     "@fortawesome/fontawesome-free": "^7.0.1",
+    "date-fns": "^4.1.0",
     "react": "^19.1.1",
+    "react-day-picker": "^9.10.0",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.1",
     "zipcodes": "^8.0.0"
