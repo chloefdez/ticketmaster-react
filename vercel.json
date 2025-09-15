@@ -1,9 +1,11 @@
 {
   "version": 2,
   "functions": {
-    "api/tm/**": { "runtime": "nodejs18.x" }
+    "api/**/*.js": {
+      "runtime": "nodejs18.x"
+    }
   },
   "rewrites": [
-    { "source": "/tmapi/(.*)", "destination": "/api/tm/$1" }
+    { "source": "/tmap/(.*)", "destination": "/api/tm/$1" }
   ]
 }
