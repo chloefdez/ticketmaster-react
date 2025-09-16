@@ -1,14 +1,17 @@
 export default async function handler(req, res) {
-  const { path = [], ...rest } = req.query;
-  const segs = Array.isArray(path) ? path : [path].filter(Boolean);
-  const tmPath = "/" + segs.join("/");
+  const tmPath = req.query.path || "";
+  if (!tmPath) {
+    res.status(400).json({ error: "Missing 'path' query" });
+    return;
+  }
 
-  const tmUrl = new URL(`https://app.ticketmaster.com${tmPath}`);
+  const tmUrl = new URL(`https://app.ticketmaster.com/${tmPath}`);
 
-  // copy all non-path query params
-  for (const [k, v] of Object.entries(rest)) {
+  // copy all query params except "path"
+  for (const [k, v] of Object.entries(req.query)) {
+    if (k === "path") continue;
     if (Array.isArray(v))
-      v.forEach((vv) => tmUrl.searchParams.append(k, String(vv)));
+      v.forEach((val) => tmUrl.searchParams.append(k, String(val)));
     else if (v != null) tmUrl.searchParams.append(k, String(v));
   }
 
