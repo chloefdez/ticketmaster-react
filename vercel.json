@@ -1,6 +1,8 @@
 {
   "version": 2,
-  "functions": { "api/**/*.js": { "runtime": "nodejs18.x" } },
+  "functions": {
+    "api/**/*.js": { "runtime": "nodejs18.x" }
+  },
   "rewrites": [
     { "source": "/tmap/(.*)", "destination": "/api/tm?path=$1" }
   ]
