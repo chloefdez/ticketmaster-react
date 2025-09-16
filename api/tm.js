@@ -7,7 +7,6 @@ export default async function handler(req, res) {
 
   const tmUrl = new URL(`https://app.ticketmaster.com/${tmPath}`);
 
-  // copy all query params except "path"
   for (const [k, v] of Object.entries(req.query)) {
     if (k === "path") continue;
     if (Array.isArray(v))
@@ -15,7 +14,6 @@ export default async function handler(req, res) {
     else if (v != null) tmUrl.searchParams.append(k, String(v));
   }
 
-  // inject secret key from Vercel env
   tmUrl.searchParams.set("apikey", process.env.TM_API_KEY);
 
   const r = await fetch(tmUrl.toString());
