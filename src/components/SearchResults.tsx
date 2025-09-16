@@ -236,7 +236,8 @@ const SearchResults: React.FC = () => {
     if (seg) search.set("segmentId", seg);
 
     // go through dev proxy for CORS safety
-    const url = `/tmapi/discovery/v2/events.json?${search.toString()}`;
+    const base = "/api/tm?path=discovery/v2/events.json&";
+    const url = `${base}${search.toString()}`;
 
     const controller = new AbortController();
     let cancelled = false;

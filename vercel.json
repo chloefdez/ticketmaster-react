@@ -1,6 +1,3 @@
 {
-  "version": 2,
-  "routes": [
-    { "src": "/tmap/(.*)", "dest": "/api/tm?path=$1" }
-  ]
+  "version": 2
 }
