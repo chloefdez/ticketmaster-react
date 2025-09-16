@@ -56,25 +56,25 @@ const HeroFeaturedEvent: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const API_KEY = import.meta.env.VITE_TICKETMASTER_API_KEY;
-    if (!API_KEY) {
-      setError(
-        "Missing Ticketmaster API key (.env.local = VITE_TICKETMASTER_API_KEY)"
-      );
-      setLoading(false);
-      return;
-    }
+    // const API_KEY = import.meta.env.VITE_TICKETMASTER_API_KEY;
+    // if (!API_KEY) {
+    //   setError(
+    //     "Missing Ticketmaster API key (.env.local = VITE_TICKETMASTER_API_KEY)"
+    //   );
+    //   setLoading(false);
+    //   return;
+    // }
 
     const page = Math.floor(Math.random() * 5);
 
     const search = new URLSearchParams();
-    search.set("apikey", API_KEY);
     search.set("countryCode", "US");
     search.set("size", "200");
     search.set("sort", "relevance,desc");
     search.set("page", String(page));
 
-    const url = `/tmapi/discovery/v2/events.json?${search.toString()}`;
+    const base = "/api/tm?path=discovery/v2/events.json&";
+    const url = `${base}${search.toString()}`;
 
     const controller = new AbortController();
 

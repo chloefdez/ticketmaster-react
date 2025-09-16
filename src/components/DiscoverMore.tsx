@@ -107,25 +107,25 @@ const DiscoverMore: React.FC = () => {
   const scrollerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const API_KEY = import.meta.env.VITE_TICKETMASTER_API_KEY;
-    if (!API_KEY) {
-      setError("Missing Ticketmaster API key");
-      setLoading(false);
-      return;
-    }
+    // const API_KEY = import.meta.env.VITE_TICKETMASTER_API_KEY;
+    // if (!API_KEY) {
+    //   setError("Missing Ticketmaster API key");
+    //   setLoading(false);
+    //   return;
+    // }
 
     // randomize pages a little so refreshes feel fresh
     const pageNum = Math.floor(Math.random() * 5);
 
     const makeUrl = (classificationName: string) => {
       const s = new URLSearchParams();
-      s.set("apikey", API_KEY);
       s.set("countryCode", "US");
       s.set("size", "24");
       s.set("sort", "relevance,desc");
       s.set("page", String(pageNum));
       s.set("classificationName", classificationName);
-      return `/tmapi/discovery/v2/events.json?${s.toString()}`;
+      const base = "/api/tm?path=discovery/v2/events.json&";
+      return `${base}${s.toString()}`;
     };
 
     const urls = [
