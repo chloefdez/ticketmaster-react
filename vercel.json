@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "rewrites": [
-    { "source": "/tmap/(.*)", "destination": "/api/tm?path=$1" }
+  "routes": [
+    { "src": "/tmap/(.*)", "dest": "/api/tm?path=$1" }
   ]
 }
